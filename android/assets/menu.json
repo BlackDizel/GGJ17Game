@@ -1,0 +1,14 @@
+{
+  "id": 0,
+  "title": "menu",
+  "childs": [
+    {
+      "id": 1,
+      "title": "play"
+    },
+    {
+      "id": 2,
+      "title": "exit"
+    }
+  ]
+}
