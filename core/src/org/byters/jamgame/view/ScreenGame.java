@@ -2,7 +2,6 @@ package org.byters.jamgame.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.byters.engine.view.IScreen;
@@ -10,74 +9,48 @@ import org.byters.jamgame.controller.*;
 import org.byters.jamgame.model.ItemDayMeta;
 
 public class ScreenGame implements IScreen {
-    private static final String FILE_TEXTURE_ITEM_BOX = "graphics/items/box.png";
-    private static final String FILE_TEXTURE_ITEM_PLANK1 = "graphics/items/h5.png";
-    private static final String FILE_TEXTURE_ITEM_PLANK2 = "graphics/items/h6.png";
-    private static final String FILE_TEXTURE_ITEM_BOTTLE = "graphics/items/bottle.png";
-    private static final String FILE_TEXTURE_ITEM_TV = "graphics/items/tv.png";
-    private static final String FILE_TEXTURE_ITEM_STONE = "graphics/items/h3.png";
-    private static final String FILE_TEXTURE_ITEM_ALARM = "graphics/items/alarm.png";
-    private static final String FILE_TEXTURE_ITEM_CAMERA = "graphics/items/photo.png";
 
-    private static final String FILE_TEXTURE_ISLAND = "graphics/island2.png";
-    private static final String FILE_TEXTURE_WATER = "graphics/tile.png";
-    private static final String FILE_TEXTURE_SKY = "graphics/sky.png";
-
-    private Texture tBox, tPlank1, tPlank2, tBottle, tTV, tStone, tAlarm, tCamera;
-    private Texture tIsland, tWater, tSky;
     private PlayerAnimation playerAnimation;
 
     private BitmapFont font;
+    private TexturesGame texturesGame;
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.draw(tSky
+        batch.draw(texturesGame.tSky
                 , -Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 3 * 2
                 , 0, 0
                 , Gdx.graphics.getWidth() * 3, Gdx.graphics.getHeight() / 3);
 
-        batch.draw(tWater
+        batch.draw(texturesGame.tWater
                 , -Gdx.graphics.getWidth(), 0
                 , 0, 0
                 , Gdx.graphics.getWidth() * 3, Gdx.graphics.getHeight() / 3 * 2);
 
-        batch.draw(tIsland, (Gdx.graphics.getWidth() - tIsland.getWidth()) / 2
-                , (Gdx.graphics.getHeight() - tIsland.getHeight()) / 2 - 40);
-        drawItems(batch);
+        batch.draw(texturesGame.tIsland, (Gdx.graphics.getWidth() - texturesGame.tIsland.getWidth()) / 2
+                , (Gdx.graphics.getHeight() - texturesGame.tIsland.getHeight()) / 2 - 40);
         playerAnimation.draw(batch);
+        drawCrab(batch);
+        drawItems(batch);
         ControllerDialogSelector.getInstance().draw(batch);
         ControllerMessage.getInstance().draw(batch);
         drawHint(batch);
         ControllerInventory.getInstance().drawInventory(batch);
     }
 
+    private void drawCrab(SpriteBatch batch) {
+        batch.draw(texturesGame.tCrab, ControllerCrab.getInstance().getPosX(), ControllerCrab.getInstance().getPosY());
+    }
+
     private void drawHint(SpriteBatch batch) {
-        font.draw(batch, "Use A,D to move, use Space to interact, use TAB to open inventory", 20, 20);
+        font.draw(batch, "Use A,D to move, Space to interact, use TAB to open/close inventory", 20, 20);
     }
 
     private void drawItems(SpriteBatch batch) {
         if (ControllerItemsDay.getInstance().getItems() == null) return;
         for (ItemDayMeta item : ControllerItemsDay.getInstance().getItems()) {
-            batch.draw(getItemTexture(item), item.getPosX(), item.getPosY());
+            batch.draw(texturesGame.getItemTexture(item), item.getPosX(), item.getPosY());
         }
-    }
-
-    private Texture getItemTexture(ItemDayMeta item) {
-        return item.getItemId() == 3 //todo refactor
-                ? tPlank1
-                : item.getItemId() == 2
-                ? tBottle
-                : item.getItemId() == 1
-                ? tPlank2
-                : item.getItemId() == 7
-                ? tAlarm
-                : item.getItemId() == 4
-                ? tStone
-                : item.getItemId() == 6
-                ? tCamera
-                : item.getItemId() == 5
-                ? tTV
-                : tBox;
     }
 
     @Override
@@ -145,21 +118,8 @@ public class ScreenGame implements IScreen {
     public void load(SpriteBatch batch) {
         font = new BitmapFont();
 
-        tBox = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_BOX));
-        tPlank1 = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_PLANK1));
-        tPlank2 = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_PLANK2));
-        tBottle = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_BOTTLE));
-        tTV = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_TV));
-        tAlarm = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_ALARM));
-        tStone = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_STONE));
-        tCamera = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_CAMERA));
-
-        tIsland = new Texture(Gdx.files.internal(FILE_TEXTURE_ISLAND));
-        tWater = new Texture(Gdx.files.internal(FILE_TEXTURE_WATER));
-        tWater.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-
-        tSky = new Texture(Gdx.files.internal(FILE_TEXTURE_SKY));
-        tSky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        texturesGame = new TexturesGame();
+        texturesGame.load();
 
         ControllerPlayer.getInstance().load();
         ControllerItems.getInstance().load();
@@ -178,6 +138,6 @@ public class ScreenGame implements IScreen {
 
     @Override
     public void dispose() {
-
+        texturesGame.dispose();
     }
 }
