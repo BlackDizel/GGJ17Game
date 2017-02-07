@@ -4,15 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.byters.jamgame.model.MenuModel;
+import org.byters.engine.model.Menu;
 
 public class ControllerMenu {
+    private static final String MENU_FILE = "menu.json";
+    private static final String TEXT_BACK = "back";
     private static ControllerMenu instance;
     private BitmapFont font;
-    private MenuModel menu;
+    private Menu menu;
 
     private ControllerMenu() {
-        menu = new MenuModel();
+        menu = new Menu();
     }
 
     public static ControllerMenu getInstance() {
@@ -24,16 +26,17 @@ public class ControllerMenu {
         if (menu.getItemsCount() == 0)
             return;
         for (int i = 0; i < menu.getItemsCount(); ++i) {
-            String title = menu.getTitle(i);
+            String title = menu.getMenuTitle(i);
             if (title == null || title.trim().equals("")) continue;
-            font.setColor(menu.getCurrentIndex() == i ? Color.RED : Color.WHITE);
+            font.setColor(menu.isCurrentIndex(i) ? Color.RED : Color.WHITE);
             font.draw(batch, title, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - i * 20);
         }
     }
 
     public void load() {
         font = new BitmapFont();
-        menu.load();
+        menu.load(MENU_FILE);
+        menu.setTextBack(TEXT_BACK);
     }
 
     public void menuItemNext() {
@@ -46,7 +49,7 @@ public class ControllerMenu {
 
     public void selectMenu() {
         int id = menu.getCurrentItemId();
-        if (id == MenuModel.NO_VALUE)
+        if (id == Menu.NO_VALUE)
             return;
 
         if (id == 1) {
