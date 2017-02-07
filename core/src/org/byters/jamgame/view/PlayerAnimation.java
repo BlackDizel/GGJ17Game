@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import org.byters.jamgame.controller.ControllerMain;
+import org.byters.engine.controller.ControllerMain;
 import org.byters.jamgame.controller.ControllerPlayer;
 import org.byters.jamgame.model.PlayerModel;
 

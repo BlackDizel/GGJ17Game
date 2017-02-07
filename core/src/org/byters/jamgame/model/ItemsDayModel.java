@@ -2,7 +2,7 @@ package org.byters.jamgame.model;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
-import org.byters.jamgame.controller.ControllerMain;
+import org.byters.engine.controller.ControllerMain;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class ItemsDayModel {
         for (int id : itemsIdsDay) {
 
             int x = Gdx.graphics.getWidth() / 3 + (int) (ControllerMain.getInstance().getRandom().nextFloat() * (Gdx.graphics.getWidth() / 3));
-            int y = Gdx.graphics.getHeight() / 24*9 + (int)(ControllerMain.getInstance().getRandom().nextFloat() *(Gdx.graphics.getHeight() / 24*2));
+            int y = Gdx.graphics.getHeight() / 24 * 9 + (int) (ControllerMain.getInstance().getRandom().nextFloat() * (Gdx.graphics.getHeight() / 24 * 2));
             itemsAvailable.add(new ItemDayMeta(id, x, y));
         }
     }
