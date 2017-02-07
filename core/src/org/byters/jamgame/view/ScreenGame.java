@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.byters.engine.view.IScreen;
 import org.byters.jamgame.controller.*;
 import org.byters.jamgame.model.ItemDayMeta;
+import org.byters.jamgame.model.Strings;
 
 public class ScreenGame implements IScreen {
 
@@ -43,7 +44,7 @@ public class ScreenGame implements IScreen {
     }
 
     private void drawHint(SpriteBatch batch) {
-        font.draw(batch, "Use A,D to move, Space to interact, use TAB to open/close inventory", 20, 20);
+        font.draw(batch, Strings.getInstance().control_hint, 20, 20);
     }
 
     private void drawItems(SpriteBatch batch) {

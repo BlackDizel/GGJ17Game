@@ -34,17 +34,16 @@ public class ScreenTextModel {
     }
 
     public String getText() {
-        //todo mode data to json file
         return state == ScreenState.STORY
-                ? "This is short story about hope and strength of mind"
+                ? Strings.getInstance().story
                 : state == ScreenState.STORY1
-                ? "Once man awake at the strange place..."
+                ? Strings.getInstance().story1
                 : state == ScreenState.GAMEOVER
-                ? "I use transmitter and sending \"SOS\" again and again.\nWhen the battery is over, speaker say:\n\"Coast patrol listen. Rescue group on the way\""
+                ? Strings.getInstance().gameover
                 : state == ScreenState.GAMEOVER1
-                ? "Thanks for playing"
+                ? Strings.getInstance().gameover1
                 : state == ScreenState.DAY_OVER
-                ? "I can't do anything more today and wait next day.\nAt dawn waves throw on shore more strange objects"
+                ? Strings.getInstance().dayover
                 : "";
     }
 
