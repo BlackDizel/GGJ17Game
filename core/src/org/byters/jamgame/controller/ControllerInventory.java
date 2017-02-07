@@ -2,6 +2,7 @@ package org.byters.jamgame.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.byters.engine.controller.ControllerCamera;
 import org.byters.jamgame.model.inventory.Inventory;
 
 public class ControllerInventory {
