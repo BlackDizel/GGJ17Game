@@ -1,6 +1,6 @@
 package org.byters.jamgame.model;
 
-import org.byters.jamgame.view.IScreen;
+import org.byters.engine.view.IScreen;
 import org.byters.jamgame.view.ScreenGame;
 import org.byters.jamgame.view.ScreenMenu;
 import org.byters.jamgame.view.ScreenText;

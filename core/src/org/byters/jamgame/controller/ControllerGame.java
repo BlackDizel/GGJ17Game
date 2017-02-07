@@ -1,5 +1,6 @@
 package org.byters.jamgame.controller;
 
+import org.byters.engine.controller.ControllerMain;
 import org.byters.jamgame.model.Screens;
 
 public class ControllerGame {
@@ -14,6 +15,6 @@ public class ControllerGame {
     }
 
     public void showMenu() {
-        ControllerMain.getInstance().navigateScreen(Screens.MENU);
+        ControllerMain.getInstance().navigateScreen(Screens.MENU.getScreen());
     }
 }

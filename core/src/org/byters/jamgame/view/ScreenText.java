@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.byters.engine.view.IScreen;
 import org.byters.jamgame.controller.ControllerScreenText;
 
 public class ScreenText implements IScreen {
@@ -20,7 +21,7 @@ public class ScreenText implements IScreen {
     }
 
     @Override
-    public void load() {
+    public void load(SpriteBatch batch) {
         font = new BitmapFont();
         layout = new GlyphLayout();
         layout.setText(font, ControllerScreenText.getInstance().getText());

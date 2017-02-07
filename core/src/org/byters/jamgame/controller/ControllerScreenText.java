@@ -1,5 +1,6 @@
 package org.byters.jamgame.controller;
 
+import org.byters.engine.controller.ControllerMain;
 import org.byters.jamgame.model.ScreenTextModel;
 import org.byters.jamgame.model.Screens;
 
@@ -19,17 +20,17 @@ public class ControllerScreenText {
 
     void navigateScreenStory() {
         model.setStateStory();
-        ControllerMain.getInstance().navigateScreen(Screens.TEXT);
+        ControllerMain.getInstance().navigateScreen(Screens.TEXT.getScreen());
     }
 
     void navigateScreenGameOver() {
         model.setStateGameOver();
-        ControllerMain.getInstance().navigateScreen(Screens.TEXT);
+        ControllerMain.getInstance().navigateScreen(Screens.TEXT.getScreen());
     }
 
     void navigateScreenDayOver() {
         model.setStateDayOver();
-        ControllerMain.getInstance().navigateScreen(Screens.TEXT);
+        ControllerMain.getInstance().navigateScreen(Screens.TEXT.getScreen());
     }
 
     public String getText() {
@@ -37,6 +38,6 @@ public class ControllerScreenText {
     }
 
     public void navigateNextScreen() {
-        ControllerMain.getInstance().navigateScreen(model.getScreenNext());
+        ControllerMain.getInstance().navigateScreen(model.getScreenNext().getScreen());
     }
 }

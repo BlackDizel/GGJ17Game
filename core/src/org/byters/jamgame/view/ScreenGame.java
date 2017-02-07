@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.byters.engine.view.IScreen;
 import org.byters.jamgame.controller.*;
 import org.byters.jamgame.model.ItemDayMeta;
 
@@ -81,6 +82,7 @@ public class ScreenGame implements IScreen {
 
     @Override
     public void update() {
+        ControllerPlayer.getInstance().update();
         playerAnimation.update();
     }
 
@@ -140,7 +142,7 @@ public class ScreenGame implements IScreen {
     }
 
     @Override
-    public void load() {
+    public void load(SpriteBatch batch) {
         font = new BitmapFont();
 
         tBox = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_BOX));
