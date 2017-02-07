@@ -46,6 +46,20 @@ class TexturesGame {
     }
 
     void dispose() {
+        //todo refactor use texture atlas
+        tBox.dispose();
+        tPlank1.dispose();
+        tPlank2.dispose();
+        tBottle.dispose();
+        tTV.dispose();
+        tAlarm.dispose();
+        tStone.dispose();
+        tCamera.dispose();
+
+        tIsland.dispose();
+        tCrab.dispose();
+        tWater.dispose();
+        tSky.dispose();
     }
 
     Texture getItemTexture(ItemDayMeta item) {
