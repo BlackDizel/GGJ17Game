@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.byters.jamgame.controller.ControllerDialog;
+import org.byters.engine.controller.ControllerDialog;
 
 public class DialogWindow {
 
@@ -98,4 +98,11 @@ public class DialogWindow {
         dialogFont = new BitmapFont();
     }
 
+    public boolean isShown() {
+        return controllerDialog.isShown();
+    }
+
+    public void show() {
+        controllerDialog.show();
+    }
 }

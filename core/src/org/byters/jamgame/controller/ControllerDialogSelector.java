@@ -5,11 +5,9 @@ import org.byters.jamgame.view.DialogWindow;
 
 public class ControllerDialogSelector {
     private static ControllerDialogSelector instance;
-    private boolean isDialogShown;
     private DialogWindow dialog;
 
     private ControllerDialogSelector() {
-        isDialogShown = false;
     }
 
     public static ControllerDialogSelector getInstance() {
@@ -18,13 +16,13 @@ public class ControllerDialogSelector {
     }
 
     public boolean isDialogShown() {
-        return isDialogShown;
+        return dialog != null && dialog.isShown();
     }
 
     void showDialog() {
-        isDialogShown = true;
         dialog = new DialogWindow();
         dialog.load();//todo must be async
+        dialog.show();
     }
 
     public void draw(SpriteBatch batch) {
@@ -35,9 +33,5 @@ public class ControllerDialogSelector {
     public void input() {
         if (dialog == null) return;
         dialog.input();
-    }
-
-    public void cancelDialog() {
-        isDialogShown = false;
     }
 }
