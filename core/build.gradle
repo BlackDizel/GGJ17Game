@@ -5,7 +5,13 @@ sourceCompatibility = 1.6
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-
 eclipse.project {
     name = appName + "-core"
+}
+
+dependencies {
+    dependencies {
+
+        compile files('libs/coreEngine-1.0.jar')
+    }
 }
