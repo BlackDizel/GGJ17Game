@@ -78,6 +78,7 @@ project(":core") {
 
 
     dependencies {
+        compile project(":coreEngine")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
 }

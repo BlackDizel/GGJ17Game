@@ -2,14 +2,14 @@ package org.byters.jamgame;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Color;
-import org.byters.engine.controller.Core;
+import org.byters.engine.Engine;
 import org.byters.jamgame.view.ScreenMenu;
 
 public class GameMain extends ApplicationAdapter {
 
     @Override
     public void create() {
-        Core.getInstance().create(new ScreenMenu());
+        Engine.getInstance().create(new ScreenMenu());
         setColorClear();
     }
 
@@ -19,21 +19,21 @@ public class GameMain extends ApplicationAdapter {
         colorClear.g = 0.1f;
         colorClear.b = 0.1f;
         colorClear.a = 1f;
-        Core.getInstance().setColorClear(colorClear);
+        Engine.getInstance().setColorClear(colorClear);
     }
 
     @Override
     public void render() {
-        Core.getInstance().render();
+        Engine.getInstance().render();
     }
 
     @Override
     public void dispose() {
-        Core.getInstance().despose();
+        Engine.getInstance().despose();
     }
 
     public void resize(int width, int height) {
-        Core.getInstance().resize(width, height);
+        Engine.getInstance().resize(width, height);
     }
 
 }
