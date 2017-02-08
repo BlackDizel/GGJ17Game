@@ -1,7 +1,7 @@
 package org.byters.jamgame.model;
 
 import com.badlogic.gdx.Gdx;
-import com.google.gson.Gson;
+import com.badlogic.gdx.utils.Json;
 import org.byters.engine.controller.ControllerMain;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class ItemsDayModel {
     public void load() {
 
         String json = Gdx.files.internal("items_day.json").readString();
-        itemsAll = new Gson().fromJson(json, ItemsDayDataCollection.class);
+        itemsAll = new Json().fromJson(ItemsDayDataCollection.class, json);
     }
 
     public void loadItems(int day) {

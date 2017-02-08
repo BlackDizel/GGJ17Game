@@ -1,7 +1,7 @@
 package org.byters.jamgame.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.google.gson.Gson;
+import com.badlogic.gdx.utils.Json;
 import org.byters.jamgame.model.inventory.CraftInfo;
 import org.byters.jamgame.model.inventory.InventoryCell;
 import org.byters.jamgame.model.inventory.ItemInfo;
@@ -26,7 +26,7 @@ public class ControllerItems {
 
     public void load() {
         String json = Gdx.files.internal(ITEMS_JSON).readString();
-        itemsData = new Gson().fromJson(json, Items.class);
+        itemsData = new Json().fromJson(Items.class, json);
     }
 
     public String getItemTitle(int id) {
