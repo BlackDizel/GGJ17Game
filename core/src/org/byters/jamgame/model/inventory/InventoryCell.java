@@ -14,7 +14,7 @@ public class InventoryCell {
     }
 
     public static String getTitle(InventoryCell cell1, InventoryCell cell2) {
-        return String.format("%s+%s", cell1.getTitle(), cell2.getTitle());
+        return cell1.getTitle() + cell2.getTitle(); //no String.format support in html project
     }
 
     public boolean isCellEmpty() {
