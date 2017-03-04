@@ -19,7 +19,11 @@ public class ControllerPlayer {
     }
 
     public void update() {
+        boolean isComplete = model.updateInteraction();
         model.update();
+
+        if (isComplete)
+            ControllerItemsDay.getInstance().interactComplete();
     }
 
     public void load() {

@@ -3,7 +3,6 @@ package org.byters.jamgame.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import org.byters.jamgame.controller.ControllerItemsDay;
 import org.byters.jamgame.model.inventory.Inventory;
 
 public class PlayerModel {
@@ -37,8 +36,6 @@ public class PlayerModel {
     }
 
     public void update() {
-        updateInteraction();
-
         if (bounds == null) return;
         float delta = Gdx.graphics.getDeltaTime();
 
@@ -60,12 +57,11 @@ public class PlayerModel {
         bounds.setPosition(xPos, yPos);
     }
 
-    private void updateInteraction() {
-        if (!isInteract || timeStartInteractMillis + timeInteractionMillis > System.currentTimeMillis())
-            return;
-        ControllerItemsDay.getInstance().interactComplete();
+    public boolean updateInteraction() {
+        if (!isInteract || timeStartInteractMillis + timeInteractionMillis > System.currentTimeMillis()) return false;
         isInteract = false;
         animationState = AnimationState.STAND;
+        return true;
     }
 
     public void move(Vector2 vMoveDirection) {
