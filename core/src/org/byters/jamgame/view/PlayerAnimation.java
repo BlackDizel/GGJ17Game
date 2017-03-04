@@ -3,10 +3,12 @@ package org.byters.jamgame.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.sun.istack.internal.Nullable;
 import org.byters.engine.controller.ControllerMain;
+import org.byters.engine.model.IDrawableObject;
 import org.byters.jamgame.controller.ControllerPlayer;
+import org.byters.jamgame.model.DrawableObjectsEnum;
 import org.byters.jamgame.model.PlayerModel;
 
 public class PlayerAnimation {
@@ -23,8 +25,15 @@ public class PlayerAnimation {
     private Animation<TextureRegion> aMove;
     private Animation<TextureRegion> aInteract;
     private Animation<TextureRegion> aCurrent;
+    private TextureRegion currentFrame;
+    private AnimationDrawableObject animationDrawableObject;
+
+    public AnimationDrawableObject getDrawableObject() {
+        return animationDrawableObject;
+    }
 
     public void load() {
+        animationDrawableObject = new AnimationDrawableObject();
         aMove = initAnimation(SPRITE_FILE_MOVE, FRAMES_NUM_MOVE);
         aInteract = initAnimation(SPRITE_FILE_INTERACT, FRAMES_NUM_INTERACT);
         aStand = initAnimation(SPRITE_FILE_STAND, FRAMES_NUM_STAND);
@@ -50,20 +59,42 @@ public class PlayerAnimation {
                 : ControllerPlayer.getInstance().getPlayerAnimationState() == PlayerModel.AnimationState.INTERACT
                 ? aInteract
                 : null;
-    }
 
-    public void draw(SpriteBatch batch) {
         if (aCurrent == null) return;
-        TextureRegion currentFrame = aCurrent.getKeyFrame(
+        currentFrame = aCurrent.getKeyFrame(
                 ControllerMain.getInstance().getGameTime() / 1000f % aCurrent.getAnimationDuration(), true);
 
         if (!ControllerPlayer.getInstance().isPlayerDirectionRight() && !currentFrame.isFlipX())
             currentFrame.flip(true, false);
         else if (ControllerPlayer.getInstance().isPlayerDirectionRight() && currentFrame.isFlipX())
             currentFrame.flip(true, false);
+    }
 
-        batch.draw(currentFrame
-                , ControllerPlayer.getInstance().getPlayerPositionX()
-                , ControllerPlayer.getInstance().getPlayerPositionY());
+    @Nullable
+    public TextureRegion getTexture() {
+        return currentFrame;
+    }
+
+    public class AnimationDrawableObject implements IDrawableObject {
+
+        @Override
+        public int getX() {
+            return (int) ControllerPlayer.getInstance().getPlayerPositionX();
+        }
+
+        @Override
+        public int getY() {
+            return (int) ControllerPlayer.getInstance().getPlayerPositionY();
+        }
+
+        @Override
+        public int getOriginY() {
+            return (int) ControllerPlayer.getInstance().getPlayerPositionY();
+        }
+
+        @Override
+        public int getID() {
+            return DrawableObjectsEnum.PLAYER_ID.ordinal();
+        }
     }
 }

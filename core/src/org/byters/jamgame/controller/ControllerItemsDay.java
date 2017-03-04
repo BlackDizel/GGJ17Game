@@ -1,7 +1,11 @@
 package org.byters.jamgame.controller;
 
+import org.byters.engine.controller.ControllerMain;
+import org.byters.engine.model.IDrawableObject;
+import org.byters.jamgame.model.DrawableObjectsEnum;
 import org.byters.jamgame.model.ItemDayMeta;
 import org.byters.jamgame.model.ItemsDayModel;
+import org.byters.jamgame.view.ScreenGame;
 
 import java.util.ArrayList;
 
@@ -35,6 +39,7 @@ public class ControllerItemsDay {
         int itemId = model.getItemInteractedId();
         if (itemId == model.NO_VALUE) return;
         ControllerInventory.getInstance().addItem(itemId);
+        ((ScreenGame)ControllerMain.getInstance().getCurrentScreen()).removeDrawableObjectItemsDay(model.getItemInteractedId());
         model.removeItemInteracted();
 
         //todo temporary #NEWDAY
@@ -53,4 +58,38 @@ public class ControllerItemsDay {
         }
         return false;
     }
+
+    public IDrawableObject getDrawableObject(ItemDayMeta item) {
+        return new ItemDayDrawableObject(item);
+    }
+
+    private class ItemDayDrawableObject implements IDrawableObject {
+
+        private final ItemDayMeta item;
+
+        ItemDayDrawableObject(ItemDayMeta item) {
+            this.item = item;
+        }
+
+        @Override
+        public int getX() {
+            return item.getPosX();
+        }
+
+        @Override
+        public int getY() {
+            return item.getPosY();
+        }
+
+        @Override
+        public int getOriginY() {
+            return item.getPosY();
+        }
+
+        @Override
+        public int getID() {
+            return DrawableObjectsEnum.getItemID(item);
+        }
+    }
+
 }
