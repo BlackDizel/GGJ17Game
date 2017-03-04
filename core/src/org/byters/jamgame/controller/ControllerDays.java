@@ -1,9 +1,15 @@
 package org.byters.jamgame.controller;
 
+import org.byters.engine.controller.ControllerSortedVerticalDrawableObjectList;
+import org.byters.engine.model.IDrawableObject;
+
+import java.util.ArrayList;
+
 public class ControllerDays {
     private static final int DAY_LAST = 3;
     private static ControllerDays instance;
     private int currentDay;
+    private ControllerSortedVerticalDrawableObjectList controllerDrawableObjects;
 
     private ControllerDays() {
         resetDays();
@@ -28,11 +34,21 @@ public class ControllerDays {
 
     public void newDay() {
         ++currentDay;
+        controllerDrawableObjects = new ControllerSortedVerticalDrawableObjectList();
         if (currentDay > DAY_LAST) ControllerScreenText.getInstance().navigateScreenGameOver();
         else ControllerScreenText.getInstance().navigateScreenDayOver();
     }
 
     public void resetDays() {
+        controllerDrawableObjects = new ControllerSortedVerticalDrawableObjectList();
         currentDay = 1;
+    }
+
+    public ArrayList<IDrawableObject> getDrawableObjects() {
+        return controllerDrawableObjects.getItems();
+    }
+
+    public void addDrawableObject(IDrawableObject item) {
+        controllerDrawableObjects.addItem(item);
     }
 }
