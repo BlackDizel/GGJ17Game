@@ -2,7 +2,10 @@ package org.byters.jamgame.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.byters.jamgame.model.ItemDayMeta;
+
+import java.util.ArrayList;
 
 class TexturesGame {
 
@@ -20,23 +23,24 @@ class TexturesGame {
     private static final String FILE_TEXTURE_SKY = "graphics/sky.png";
     private static final String FILE_TEXTURE_CRAB = "graphics/crab.png";
 
-    Texture tIsland, tWater, tSky, tCrab;
+    Texture tIsland, tWater, tSky;
 
-    private Texture tBox, tPlank1, tPlank2, tBottle, tTV, tStone, tAlarm, tCamera;
+    private TextureRegion tBox, tPlank1, tPlank2, tBottle, tTV, tStone, tAlarm, tCamera, tCrab;
+    private ArrayList<Texture> textures;
 
     void load() {
-        tBox = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_BOX));
-        tPlank1 = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_PLANK1));
-        tPlank2 = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_PLANK2));
-        tBottle = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_BOTTLE));
-        tTV = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_TV));
-        tAlarm = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_ALARM));
-        tStone = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_STONE));
-        tCamera = new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_CAMERA));
+        tBox = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_BOX)));
+        tPlank1 = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_PLANK1)));
+        tPlank2 = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_PLANK2)));
+        tBottle = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_BOTTLE)));
+        tTV = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_TV)));
+        tAlarm = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_ALARM)));
+        tStone = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_STONE)));
+        tCamera = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_ITEM_CAMERA)));
+
+        tCrab = convertToTextureRegion(new Texture(Gdx.files.internal(FILE_TEXTURE_CRAB)));
 
         tIsland = new Texture(Gdx.files.internal(FILE_TEXTURE_ISLAND));
-        tCrab = new Texture(Gdx.files.internal(FILE_TEXTURE_CRAB));
-
 
         tWater = new Texture(Gdx.files.internal(FILE_TEXTURE_WATER));
         tWater.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -45,24 +49,28 @@ class TexturesGame {
         tSky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
     }
 
+    private TextureRegion convertToTextureRegion(Texture texture) {
+        if (textures == null) textures = new ArrayList<Texture>();
+        textures.add(texture);
+
+        return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
+    }
+
+    public TextureRegion getCrab() {
+        return tCrab;
+    }
+
     void dispose() {
-        //todo refactor use texture atlas
-        tBox.dispose();
-        tPlank1.dispose();
-        tPlank2.dispose();
-        tBottle.dispose();
-        tTV.dispose();
-        tAlarm.dispose();
-        tStone.dispose();
-        tCamera.dispose();
+        if (textures == null) return;
+        for (Texture texture : textures)
+            texture.dispose();
 
         tIsland.dispose();
-        tCrab.dispose();
         tWater.dispose();
         tSky.dispose();
     }
 
-    Texture getItemTexture(ItemDayMeta item) {
+    TextureRegion getItemTexture(ItemDayMeta item) {
         return item.getItemId() == 3 //todo refactor
                 ? tPlank1
                 : item.getItemId() == 2
