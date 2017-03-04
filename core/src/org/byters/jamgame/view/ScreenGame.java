@@ -4,20 +4,40 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.byters.engine.view.DrawerDrawableObjectList;
 import org.byters.engine.view.IScreen;
 import org.byters.jamgame.controller.*;
+import org.byters.jamgame.model.DrawableObjectsEnum;
 import org.byters.jamgame.model.ItemDayMeta;
 import org.byters.jamgame.model.Strings;
 
 public class ScreenGame implements IScreen {
 
     private PlayerAnimation playerAnimation;
+    private DrawerDrawableObjectList drawerVerticalSortedObjects;
 
     private BitmapFont font;
     private TexturesGame texturesGame;
 
     @Override
     public void draw(SpriteBatch batch) {
+        drawBackground(batch);
+        drawObjects(batch);
+        drawUI(batch);
+    }
+
+    private void drawObjects(SpriteBatch batch) {
+        drawerVerticalSortedObjects.draw(batch, ControllerDays.getInstance().getDrawableObjects());
+    }
+
+    private void drawUI(SpriteBatch batch) {
+        ControllerDialogSelector.getInstance().draw(batch);
+        ControllerMessage.getInstance().draw(batch);
+        drawHint(batch);
+        ControllerInventory.getInstance().drawInventory(batch);
+    }
+
+    private void drawBackground(SpriteBatch batch) {
         batch.draw(texturesGame.tSky
                 , -Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 3 * 2
                 , 0, 0
@@ -30,34 +50,17 @@ public class ScreenGame implements IScreen {
 
         batch.draw(texturesGame.tIsland, (Gdx.graphics.getWidth() - texturesGame.tIsland.getWidth()) / 2
                 , (Gdx.graphics.getHeight() - texturesGame.tIsland.getHeight()) / 2 - 40);
-        playerAnimation.draw(batch);
-        drawCrab(batch);
-        drawItems(batch);
-        ControllerDialogSelector.getInstance().draw(batch);
-        ControllerMessage.getInstance().draw(batch);
-        drawHint(batch);
-        ControllerInventory.getInstance().drawInventory(batch);
-    }
-
-    private void drawCrab(SpriteBatch batch) {
-        batch.draw(texturesGame.tCrab, ControllerCrab.getInstance().getPosX(), ControllerCrab.getInstance().getPosY());
     }
 
     private void drawHint(SpriteBatch batch) {
         font.draw(batch, Strings.getInstance().control_hint, 20, 20);
     }
 
-    private void drawItems(SpriteBatch batch) {
-        if (ControllerItemsDay.getInstance().getItems() == null) return;
-        for (ItemDayMeta item : ControllerItemsDay.getInstance().getItems()) {
-            batch.draw(texturesGame.getItemTexture(item), item.getPosX(), item.getPosY());
-        }
-    }
-
     @Override
     public void update() {
         ControllerPlayer.getInstance().update();
         playerAnimation.update();
+        drawerVerticalSortedObjects.setTexture(playerAnimation.getTexture(), playerAnimation.getDrawableObject().getID());
     }
 
     @Override
@@ -119,8 +122,13 @@ public class ScreenGame implements IScreen {
     public void load(SpriteBatch batch) {
         font = new BitmapFont();
 
+        drawerVerticalSortedObjects = new DrawerDrawableObjectList();
+
         texturesGame = new TexturesGame();
         texturesGame.load();
+
+        playerAnimation = new PlayerAnimation();
+        playerAnimation.load();
 
         ControllerPlayer.getInstance().load();
         ControllerItems.getInstance().load();
@@ -128,17 +136,33 @@ public class ScreenGame implements IScreen {
         ControllerMessage.getInstance().load();
         ControllerItemsDay.getInstance().load();
         loadNewDay();
-
-        playerAnimation = new PlayerAnimation();
-        playerAnimation.load();
     }
 
     private void loadNewDay() {
         ControllerItemsDay.getInstance().loadItems();
+
+        drawerVerticalSortedObjects.clear();
+
+        drawerVerticalSortedObjects.setTexture(playerAnimation.getTexture(), playerAnimation.getDrawableObject().getID());
+        ControllerDays.getInstance().addDrawableObject(playerAnimation.getDrawableObject());
+
+        drawerVerticalSortedObjects.setTexture(texturesGame.getCrab(), ControllerCrab.getInstance().getDrawableObject().getID());
+        ControllerDays.getInstance().addDrawableObject(ControllerCrab.getInstance().getDrawableObject());
+
+        if (ControllerItemsDay.getInstance().getItems() != null)
+            for (ItemDayMeta item : ControllerItemsDay.getInstance().getItems()) {
+                drawerVerticalSortedObjects.setTexture(texturesGame.getItemTexture(item), DrawableObjectsEnum.getItemID(item));
+                ControllerDays.getInstance().addDrawableObject(ControllerItemsDay.getInstance().getDrawableObject(item));
+            }
     }
 
     @Override
     public void dispose() {
         texturesGame.dispose();
+    }
+
+    public void removeDrawableObjectItemsDay(int itemId) {
+        drawerVerticalSortedObjects.removeTexture(DrawableObjectsEnum.getItemID(itemId));
+
     }
 }
