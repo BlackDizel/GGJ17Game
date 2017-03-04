@@ -1,5 +1,7 @@
 package org.byters.jamgame.controller;
 
+import com.badlogic.gdx.Gdx;
+
 public class ControllerCrab {
     private static ControllerCrab instance;
 
@@ -9,12 +11,10 @@ public class ControllerCrab {
     }
 
     public float getPosX() {
-        //todo implement
-        return 220;
+        return Gdx.graphics.getWidth() / 3;
     }
 
     public float getPosY() {
-        //todo implement
-        return 184;
+        return Gdx.graphics.getHeight() / 15 * 6;
     }
 }
