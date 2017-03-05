@@ -2,15 +2,14 @@ package org.byters.jamgame.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
-import org.byters.jamgame.model.inventory.CraftInfo;
-import org.byters.jamgame.model.inventory.InventoryCell;
-import org.byters.jamgame.model.inventory.ItemInfo;
-import org.byters.jamgame.model.inventory.Items;
+import org.byters.jamgame.model.ItemsDayModel;
+import org.byters.jamgame.model.inventory.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class ControllerItems {
+    public static final int NO_VALUE = -1;
     private static final String ITEMS_JSON = "items.json";
     private static ControllerItems instance;
     private Items itemsData;
@@ -43,12 +42,22 @@ public class ControllerItems {
 
         //todo refactor this
         for (CraftInfo info : itemsData.getCraft()) {
-            if (isEquals(info.getItems(), cell1, cell2))
-                return info.getTitle();
             if (isContains(info.getItems(), cell1, cell2))
                 return InventoryCell.getTitle(cell1, cell2);
         }
         return null;
+    }
+
+    public int getItemIdCombined(InventoryCell cell1, InventoryCell cell2) {
+        if (cell1 == null || cell2 == null || cell1.isCellEmpty() || cell2.isCellEmpty())
+            return NO_VALUE;
+
+        //todo refactor this
+        for (CraftInfo info : itemsData.getCraft()) {
+            if (isEquals(info.getItems(), cell1, cell2))
+                return info.getItemId();
+        }
+        return NO_VALUE;
     }
 
     private boolean isContains(int[] items, InventoryCell cell1, InventoryCell cell2) {
@@ -73,4 +82,15 @@ public class ControllerItems {
         return true;
     }
 
+    int getInteractedItemTime() {
+        int id = ControllerItemsDay.getInstance().getInteractedItemID();
+        if (id == ItemsDayModel.NO_VALUE)
+            return NO_VALUE;
+
+        if (itemsData == null || itemsData.getTimeInteract() == null) return NO_VALUE;
+        for (InteractInfo item : itemsData.getTimeInteract())
+            if (item.getItemId() == id)
+                return item.getTimeInteract();
+        return NO_VALUE;
+    }
 }

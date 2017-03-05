@@ -11,6 +11,7 @@ import org.byters.jamgame.controller.ControllerDays;
 import org.byters.jamgame.controller.ControllerItems;
 import org.byters.jamgame.controller.ControllerMessage;
 import org.byters.jamgame.controller.ControllerPlayer;
+import org.byters.jamgame.model.Strings;
 
 public class Inventory {
     public static final int INVENTORY_WIDTH = 200;
@@ -107,13 +108,24 @@ public class Inventory {
     }
 
     boolean combineItems(InventoryCell cell1, InventoryCell cell2) {
-        String title = ControllerItems.getInstance().getTitleCombined(cell1, cell2);
-        if (title == null) return false;
-        removeItem(cell1);
-        removeItem(cell2);
-        addItem(title, cell1, cell2);
-        selectedItem = null;
-        return true;
+
+        int itemId;
+        itemId = ControllerItems.getInstance().getItemIdCombined(cell1, cell2);
+        if (itemId != ControllerItems.NO_VALUE) {
+            removeItem(cell1);
+            removeItem(cell2);
+            addItem(itemId);
+            selectedItem = null;
+            return true;
+        } else {
+            String title = ControllerItems.getInstance().getTitleCombined(cell1, cell2);
+            if (title == null) return false;
+            removeItem(cell1);
+            removeItem(cell2);
+            addItem(title, cell1, cell2);
+            selectedItem = null;
+            return true;
+        }
     }
 
     private void addItem(String title, InventoryCell cell1, InventoryCell cell2) {
@@ -170,7 +182,7 @@ public class Inventory {
                 return;
             }
             if (checkDisassembly(item)) return;
-            ControllerMessage.getInstance().showMessage("Cannot use this");
+            ControllerMessage.getInstance().showMessage(Strings.getInstance().cannot_use);
         } else if (mode == Mode.CRAFT) {
             if (selectedItem == null) {
                 selectedItem = item;
@@ -183,7 +195,7 @@ public class Inventory {
             }
 
             ControllerMessage.getInstance().showMessage(
-                    combineItems(selectedItem, item) ? "Success" : "Cannot craft");
+                    combineItems(selectedItem, item) ? Strings.getInstance().success : Strings.getInstance().cannot_craft);
         }
     }
 
