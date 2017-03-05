@@ -2,6 +2,7 @@ package org.byters.jamgame.controller;
 
 import org.byters.engine.controller.ControllerSortedVerticalDrawableObjectList;
 import org.byters.engine.model.IDrawableObject;
+import org.byters.jamgame.model.DrawableObjectsEnum;
 
 import java.util.ArrayList;
 
@@ -46,5 +47,9 @@ public class ControllerDays {
 
     public void addDrawableObject(IDrawableObject item) {
         controllerDrawableObjects.addItem(item);
+    }
+
+    public void removeDrawableObject(int itemId) {
+        controllerDrawableObjects.removeItem(DrawableObjectsEnum.getItemID(itemId));
     }
 }
