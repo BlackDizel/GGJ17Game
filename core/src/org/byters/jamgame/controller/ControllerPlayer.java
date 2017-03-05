@@ -54,9 +54,9 @@ public class ControllerPlayer {
     public void interact() {
         if (model.isInteract()) return;
         if (!ControllerItemsDay.getInstance().setItemInteract()) return;
-
+        int time = ControllerItems.getInstance().getInteractedItemTime();
         //ControllerDialogSelector.getInstance().showDialog(); //todo temp remove dialogs from game :(
-        model.interact(3000);  //todo placeholder
+        model.interact(time);
     }
 
     public void stop() {
