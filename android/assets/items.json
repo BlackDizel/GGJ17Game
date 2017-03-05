@@ -2,63 +2,63 @@
   "items": [
     {
       "id": 1,
-      "title": "trash",
-      "imagePosition": 0
+      "title": "trash"
     },
     {
       "id": 2,
-      "title": "bottle",
-      "imagePosition": 1
+      "title": "bottle"
     },
     {
       "id": 3,
-      "title": "plank",
-      "imagePosition": 2
+      "title": "plank"
     },
     {
       "id": 4,
-      "title": "stone",
-      "imagePosition": 3
+      "title": "stone"
     },
     {
       "id": 5,
-      "title": "TV",
-      "imagePosition": 4
+      "title": "TV"
     },
     {
       "id": 6,
-      "title": "camera",
-      "imagePosition": 5
+      "title": "camera"
     },
     {
       "id": 7,
-      "title": "alarm",
-      "imagePosition": 6
+      "title": "alarm"
     },
     {
       "id": 8,
-      "title": "battery",
-      "imagePosition": 6
+      "title": "battery"
     },
     {
       "id": 9,
-      "title": "circuit board",
-      "imagePosition": 6
+      "title": "circuit board"
     },
     {
       "id": 10,
-      "title": "wires",
-      "imagePosition": 6
+      "title": "wires"
     },
     {
       "id": 11,
-      "title": "antenna",
-      "imagePosition": 6
+      "title": "antenna"
     },
     {
       "id": 12,
-      "title": "microphone",
-      "imagePosition": 6
+      "title": "microphone"
+    },
+    {
+      "id": 13,
+      "title": "spear"
+    },
+    {
+      "id": 14,
+      "title": "glassing"
+    },
+    {
+      "id": 15,
+      "title": "transmitter"
     }
   ],
   "craft": [
@@ -67,14 +67,14 @@
         3,
         4
       ],
-      "title": "spear"
+      "itemId": 13
     },
     {
       "items": [
         2,
         4
       ],
-      "title": "glassing"
+      "itemId": 14
     },
     {
       "items": [
@@ -84,7 +84,29 @@
         11,
         12
       ],
-      "title": "transmitter"
+      "itemId": 15
+    }
+  ],
+  "timeInteract": [
+    {
+      "itemId": 3,
+      "timeInteract": 2000
+    },
+    {
+      "itemId": 5,
+      "timeInteract": 3000
+    },
+    {
+      "itemId": 6,
+      "timeInteract": 4000
+    },
+    {
+      "itemId": 7,
+      "timeInteract": 5000
+    },
+    {
+      "itemId": 15,
+      "timeInteract": 6000
     }
   ]
 }

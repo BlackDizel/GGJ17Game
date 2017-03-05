@@ -1,14 +1,14 @@
 package org.byters.jamgame.model.inventory;
 
-public class CraftInfo {
-    private int[] items;
+public class InteractInfo {
     private int itemId;
-
-    public int[] getItems() {
-        return items;
-    }
+    private int timeInteract;
 
     public int getItemId() {
         return itemId;
+    }
+
+    public int getTimeInteract() {
+        return timeInteract;
     }
 }
