@@ -93,4 +93,17 @@ public class ControllerItems {
                 return item.getTimeInteract();
         return NO_VALUE;
     }
+
+    public int[] getParts(InventoryCell item) {
+        if (itemsData == null || itemsData.getDisassembly() == null)
+            return null;
+
+        for (DisassemblyInfo info : itemsData.getDisassembly()) {
+            ArrayList<Integer> ids = item.getItems();
+            if (ids == null || ids.size() == 0) continue;
+            if (info.getItemId() == item.getItems().get(0))
+                return info.getParts();
+        }
+        return null;
+    }
 }
