@@ -10,6 +10,9 @@ public class Strings {
     public String gameover = "I use transmitter and sending \"SOS\" again and again.\nWhen the battery is over, speaker say:\n\"Coast patrol listen. Rescue group on the way\"";
     public String gameover1 = "Thanks for playing";
     public String dayover = "I can't do anything more today and wait next day.\nAt dawn waves throw on shore more strange objects";
+    public String cannot_use = "Cannot use this";
+    public String success = "Success";
+    public String cannot_craft = "Cannot craft";
 
     private Strings() {
     }
