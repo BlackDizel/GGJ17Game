@@ -6,6 +6,7 @@ public class Items {
     private ArrayList<ItemInfo> items;
     private ArrayList<CraftInfo> craft;
     private ArrayList<InteractInfo> timeInteract;
+    private ArrayList<DisassemblyInfo> disassembly;
 
     public ArrayList<ItemInfo> getItems() {
         return items;
@@ -17,5 +18,9 @@ public class Items {
 
     public ArrayList<InteractInfo> getTimeInteract() {
         return timeInteract;
+    }
+
+    public ArrayList<DisassemblyInfo> getDisassembly() {
+        return disassembly;
     }
 }

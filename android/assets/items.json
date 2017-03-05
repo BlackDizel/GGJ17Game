@@ -108,5 +108,27 @@
       "itemId": 15,
       "timeInteract": 6000
     }
+  ],
+  "disassembly": [
+    {
+      "itemId": 6,
+      "parts": [
+        12
+      ]
+    },
+    {
+      "itemId": 5,
+      "parts": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "itemId": 7,
+      "parts": [
+        8
+      ]
+    }
   ]
 }
