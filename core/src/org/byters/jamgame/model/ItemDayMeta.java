@@ -1,11 +1,13 @@
 package org.byters.jamgame.model;
 
-public class ItemDayMeta {
-    private int itemId;
-    private int xPos;
-    private int yPos;
+import org.byters.engine.model.IDrawableObject;
 
-    public ItemDayMeta(int itemId, int xPos, int yPos) {
+public class ItemDayMeta implements IDrawableObject {
+    private int itemId;
+    private float xPos;
+    private float yPos;
+
+    ItemDayMeta(int itemId, int xPos, int yPos) {
         this.itemId = itemId;
         this.xPos = xPos;
         this.yPos = yPos;
@@ -15,11 +17,27 @@ public class ItemDayMeta {
         return itemId;
     }
 
-    public int getPosX() {
-        return xPos;
+    void translateY(float value) {
+        yPos += value;
     }
 
-    public int getPosY() {
-        return yPos;
+    @Override
+    public int getX() {
+        return (int) xPos;
+    }
+
+    @Override
+    public int getY() {
+        return (int) yPos;
+    }
+
+    @Override
+    public int getOriginY() {
+        return (int) yPos;
+    }
+
+    @Override
+    public int getID() {
+        return DrawableObjectsEnum.getItemID(itemId);
     }
 }

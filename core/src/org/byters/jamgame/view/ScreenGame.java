@@ -154,7 +154,7 @@ public class ScreenGame implements IScreen {
         if (ControllerItemsDay.getInstance().getItems() != null)
             for (ItemDayMeta item : ControllerItemsDay.getInstance().getItems()) {
                 drawerVerticalSortedObjects.setTexture(texturesGame.getItemTexture(item), DrawableObjectsEnum.getItemID(item));
-                ControllerDays.getInstance().addDrawableObject(item.getDrawableObject());
+                ControllerDays.getInstance().addDrawableObject(item);
             }
     }
 

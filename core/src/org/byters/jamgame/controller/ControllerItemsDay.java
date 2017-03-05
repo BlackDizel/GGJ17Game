@@ -47,7 +47,7 @@ public class ControllerItemsDay {
     boolean setItemInteract() {
         if (model.getItemsDay() == null) return false;
         for (ItemDayMeta item : model.getItemsDay()) {
-            if (Math.abs(item.getPosX() - ControllerPlayer.getInstance().getPositionXCenter()) < INTERACTION_DISTANCE) {
+            if (Math.abs(item.getX() - ControllerPlayer.getInstance().getPositionXCenter()) < INTERACTION_DISTANCE) {
                 model.setItemInteracted(item);
                 return true;
             }
