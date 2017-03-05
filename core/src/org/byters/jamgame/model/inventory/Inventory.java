@@ -23,14 +23,6 @@ public class Inventory {
     private static final int MAX_ITEMS_NUM = 20;
     private static final int ITEM_HEIGHT = 20;
     private static final String TITLE_ITEM_QUEST = "transmitter";
-    private static final String TITLE_ITEM_CAMERA = "camera";
-    private static final String TITLE_ITEM_TV = "TV";
-    private static final String TITLE_ITEM_ALARM = "alarm";
-    private static final int ID_MICROPHONE = 12;
-    private static final int ID_ANTENNA = 11;
-    private static final int ID_WIRES = 10;
-    private static final int ID_CIRCUIT_BOARD = 9;
-    private static final int ID_BATTERY = 8;
 
     private boolean isVisible;
     private Texture tInventoryBackground;
@@ -200,26 +192,15 @@ public class Inventory {
     }
 
     private boolean checkDisassembly(InventoryCell item) {
-        //todo move this to json
-        if (item.getTitle().equals(TITLE_ITEM_CAMERA)) {
-            removeItem(item);
-            addItem(ID_MICROPHONE);
-            return true;
-        }
-        if (item.getTitle().equals(TITLE_ITEM_TV)) {
-            removeItem(item);
-            addItem(ID_ANTENNA);
-            addItem(ID_WIRES);
-            addItem(ID_CIRCUIT_BOARD);
-            return true;
-        }
+        int[] parts = ControllerItems.getInstance().getParts(item);
+        if (parts == null) return false;
 
-        if (item.getTitle().equals(TITLE_ITEM_ALARM)) {
-            removeItem(item);
-            addItem(ID_BATTERY);
-            return true;
-        }
-        return false;
+        removeItem(item);
+
+        for (int id : parts)
+            addItem(id);
+
+        return true;
     }
 
     private InventoryCell getItem(int x, int y) {
