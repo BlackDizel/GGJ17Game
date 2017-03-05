@@ -9,10 +9,11 @@ import java.util.ArrayList;
 public class ItemsDayModel {
 
     public static final int NO_VALUE = -1;
+    private static final double SIN_SPEED_FACTOR = 1000d;
+    private static final double SIN_HEIGHT_SCREEN_PERCENT = 0.01f;
     private ItemsDayDataCollection itemsAll;
     private ArrayList<ItemDayMeta> itemsAvailable;
     private ItemDayMeta itemInteracted;
-
 
     public void load() {
 
@@ -63,5 +64,14 @@ public class ItemsDayModel {
 
     public boolean isNoAvailableItems() {
         return itemsAvailable == null || itemsAvailable.size() == 0;
+    }
+
+    public void update() {
+        if (itemsAvailable == null) return;
+        for (ItemDayMeta item : itemsAvailable) {
+            if (itemInteracted != null && item.getID() == itemInteracted.getID()) continue;
+            float value = (float) (Math.sin(System.currentTimeMillis() / SIN_SPEED_FACTOR) * Gdx.graphics.getHeight() / 100f * SIN_HEIGHT_SCREEN_PERCENT);
+            item.translateY(value);
+        }
     }
 }

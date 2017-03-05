@@ -1,8 +1,10 @@
 package org.byters.jamgame.model;
 
+import com.badlogic.gdx.Gdx;
 import org.byters.engine.model.IDrawableObject;
 
 public class ItemDayMeta implements IDrawableObject {
+    private static int MAX_VERTICAL_WAVES_SCREEN_PERCENT = 40;
     private int itemId;
     private float xPos;
     private float yPos;
@@ -18,6 +20,7 @@ public class ItemDayMeta implements IDrawableObject {
     }
 
     void translateY(float value) {
+        if (yPos + value >= Gdx.graphics.getHeight() / 100f * MAX_VERTICAL_WAVES_SCREEN_PERCENT) return;
         yPos += value;
     }
 
