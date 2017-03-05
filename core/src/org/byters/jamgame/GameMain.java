@@ -29,7 +29,7 @@ public class GameMain extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-        Engine.getInstance().despose();
+        Engine.getInstance().dispose();
     }
 
     public void resize(int width, int height) {
