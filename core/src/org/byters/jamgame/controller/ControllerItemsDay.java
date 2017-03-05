@@ -58,4 +58,8 @@ public class ControllerItemsDay {
     public void update() {
         model.update();
     }
+
+    int getInteractedItemID() {
+        return model.getItemInteractedId();
+    }
 }
