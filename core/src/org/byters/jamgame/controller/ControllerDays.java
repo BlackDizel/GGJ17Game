@@ -20,10 +20,6 @@ public class ControllerDays {
         return instance;
     }
 
-    public void loadSavedState(int day) {
-        currentDay = day;
-    }
-
     int getDay() {
         return currentDay;
     }
@@ -32,7 +28,7 @@ public class ControllerDays {
         return currentDay == DAY_LAST;
     }
 
-    public void newDay() {
+    public void dayOver() {
         ++currentDay;
         controllerDrawableObjects = new ControllerSortedVerticalDrawableObjectList();
         if (currentDay > DAY_LAST) ControllerScreenText.getInstance().navigateScreenGameOver();

@@ -166,7 +166,7 @@ public class Inventory {
 
         if (mode == Mode.USE) {
             if (item.getTitle().equals(TITLE_ITEM_QUEST)) {
-                ControllerDays.getInstance().newDay();
+                ControllerDays.getInstance().dayOver();
                 return;
             }
             if (checkDisassembly(item)) return;

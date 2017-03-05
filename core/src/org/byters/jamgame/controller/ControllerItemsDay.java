@@ -44,7 +44,7 @@ public class ControllerItemsDay {
 
         //todo temporary #NEWDAY
         if (model.isNoAvailableItems() && !ControllerDays.getInstance().isLastDay()) {
-            ControllerDays.getInstance().newDay();
+            ControllerDays.getInstance().dayOver();
         }
     }
 
