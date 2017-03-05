@@ -61,6 +61,8 @@ public class ScreenGame implements IScreen {
         ControllerPlayer.getInstance().update();
         playerAnimation.update();
         drawerVerticalSortedObjects.setTexture(playerAnimation.getTexture(), playerAnimation.getDrawableObject().getID());
+
+        ControllerItemsDay.getInstance().update();
     }
 
     @Override
@@ -135,10 +137,10 @@ public class ScreenGame implements IScreen {
         ControllerInventory.getInstance().load();
         ControllerMessage.getInstance().load();
         ControllerItemsDay.getInstance().load();
-        loadNewDay();
+        loadDay();
     }
 
-    private void loadNewDay() {
+    private void loadDay() {
         ControllerItemsDay.getInstance().loadItems();
 
         drawerVerticalSortedObjects.clear();
@@ -152,17 +154,12 @@ public class ScreenGame implements IScreen {
         if (ControllerItemsDay.getInstance().getItems() != null)
             for (ItemDayMeta item : ControllerItemsDay.getInstance().getItems()) {
                 drawerVerticalSortedObjects.setTexture(texturesGame.getItemTexture(item), DrawableObjectsEnum.getItemID(item));
-                ControllerDays.getInstance().addDrawableObject(ControllerItemsDay.getInstance().getDrawableObject(item));
+                ControllerDays.getInstance().addDrawableObject(item.getDrawableObject());
             }
     }
 
     @Override
     public void dispose() {
         texturesGame.dispose();
-    }
-
-    public void removeDrawableObjectItemsDay(int itemId) {
-        drawerVerticalSortedObjects.removeTexture(DrawableObjectsEnum.getItemID(itemId));
-
     }
 }
