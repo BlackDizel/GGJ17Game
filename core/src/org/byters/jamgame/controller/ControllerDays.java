@@ -52,4 +52,8 @@ public class ControllerDays {
     public void removeDrawableObject(int itemId) {
         controllerDrawableObjects.removeItem(DrawableObjectsEnum.getItemID(itemId));
     }
+
+    public void update() {
+        controllerDrawableObjects.sort();
+    }
 }
