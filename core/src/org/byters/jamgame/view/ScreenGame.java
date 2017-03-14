@@ -15,8 +15,11 @@ import org.byters.jamgame.model.Strings;
 
 public class ScreenGame implements IScreen {
 
+    private static final float FISH_POSITION_X_FACTOR = 0.1f;
+    private static final float FISH_POSITION_Y_FACTOR = 0.3f;
     private PlayerAnimation playerAnimation;
-    private WaterRingsAnimation waterRingsAnimation;
+    private SimpleLineLoopAnimation waterRingsAnimation;
+    private SimpleLineLoopAnimation waterFishAnimation;
     private DrawerDrawableObjectList drawerVerticalSortedObjects;
 
     private BitmapFont font;
@@ -66,6 +69,10 @@ public class ScreenGame implements IScreen {
 
         batch.draw(texturesGame.tIsland, (Gdx.graphics.getWidth() - texturesGame.tIsland.getWidth()) / 2
                 , (Gdx.graphics.getHeight() - texturesGame.tIsland.getHeight()) / 2 - 40);
+
+        batch.draw(waterFishAnimation.getCurrentFrame()
+                , Gdx.graphics.getWidth() * FISH_POSITION_X_FACTOR
+                , Gdx.graphics.getHeight() * FISH_POSITION_Y_FACTOR);
     }
 
     private void drawHint(SpriteBatch batch) {
@@ -77,6 +84,7 @@ public class ScreenGame implements IScreen {
         ControllerPlayer.getInstance().update();
         playerAnimation.update();
         waterRingsAnimation.update();
+        waterFishAnimation.update();
         drawerVerticalSortedObjects.setTexture(playerAnimation.getTexture(), playerAnimation.getDrawableObject().getID());
 
         ControllerItemsDay.getInstance().update();
@@ -150,8 +158,11 @@ public class ScreenGame implements IScreen {
         playerAnimation = new PlayerAnimation();
         playerAnimation.load();
 
-        waterRingsAnimation = new WaterRingsAnimation();
+        waterRingsAnimation = new SimpleLineLoopAnimation(TexturesGame.ANIMATION_FILE_WATER_RINGS, 3, 0.09f);
         waterRingsAnimation.load();
+
+        waterFishAnimation = new SimpleLineLoopAnimation(TexturesGame.ANIMATION_FILE_FISH_WATER, 3, 0.09f);
+        waterFishAnimation.load();
 
         ControllerPlayer.getInstance().load();
         ControllerItems.getInstance().load();
