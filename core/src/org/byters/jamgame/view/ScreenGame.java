@@ -16,6 +16,7 @@ import org.byters.jamgame.model.Strings;
 public class ScreenGame implements IScreen {
 
     private PlayerAnimation playerAnimation;
+    private WaterRingsAnimation waterRingsAnimation;
     private DrawerDrawableObjectList drawerVerticalSortedObjects;
 
     private BitmapFont font;
@@ -36,6 +37,12 @@ public class ScreenGame implements IScreen {
                     , ControllerPlayer.getInstance().getPlayerPositionX()
                     , ControllerPlayer.getInstance().getPlayerPositionY());
             batch.setColor(Color.WHITE);
+
+            if (waterRingsAnimation.getCurrentFrame() != null) {
+                batch.draw(waterRingsAnimation.getCurrentFrame()
+                        , ControllerPlayer.getInstance().getPlayerPositionX() + playerAnimation.getFrameWidth() / 2 - waterRingsAnimation.getFrameWidth() / 2
+                        , playerAnimation.getDrawableObject().getY() - waterRingsAnimation.getFrameHeight() / 2);
+            }
         }
     }
 
@@ -69,6 +76,7 @@ public class ScreenGame implements IScreen {
     public void update() {
         ControllerPlayer.getInstance().update();
         playerAnimation.update();
+        waterRingsAnimation.update();
         drawerVerticalSortedObjects.setTexture(playerAnimation.getTexture(), playerAnimation.getDrawableObject().getID());
 
         ControllerItemsDay.getInstance().update();
@@ -141,6 +149,9 @@ public class ScreenGame implements IScreen {
 
         playerAnimation = new PlayerAnimation();
         playerAnimation.load();
+
+        waterRingsAnimation = new WaterRingsAnimation();
+        waterRingsAnimation.load();
 
         ControllerPlayer.getInstance().load();
         ControllerItems.getInstance().load();
