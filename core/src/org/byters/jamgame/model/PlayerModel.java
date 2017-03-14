@@ -1,11 +1,15 @@
 package org.byters.jamgame.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import org.byters.jamgame.model.inventory.Inventory;
 
 public class PlayerModel {
+    public static final Color TINT_COLOR = Color.CYAN;
+    private static final float COLLISION_RIGHT_FACTOR = 0.8f;
+    private static final float COLLISION_LEFT_FACTOR = 0.2f;
     private static final float speed = 52f;
     private static final float PLAYER_WIDTH = 40;
     private static final float PLAYER_HEIGHT = 64;
@@ -76,9 +80,9 @@ public class PlayerModel {
     }
 
     private boolean isCollision(Rectangle bounds) {
-        return Gdx.graphics.getWidth() / 4 * 3 < (bounds.getX() + bounds.getWidth())
+        return Gdx.graphics.getWidth() * COLLISION_RIGHT_FACTOR < (bounds.getX() + bounds.getWidth())
                 || Gdx.graphics.getHeight() < (bounds.getY() + bounds.getHeight())
-                || bounds.getX() < Gdx.graphics.getWidth() / 4
+                || bounds.getX() < Gdx.graphics.getWidth() * COLLISION_LEFT_FACTOR
                 || bounds.getY() < 0;
     }
 
