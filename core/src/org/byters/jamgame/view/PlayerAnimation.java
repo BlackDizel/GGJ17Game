@@ -107,6 +107,14 @@ public class PlayerAnimation {
         return textureTinted;
     }
 
+    int getFrameWidth() {
+        return frameWidth;
+    }
+
+    public int getHeightTinted() {
+        return Math.max(0, frameHeight - heightNotTinted);
+    }
+
     public class AnimationDrawableObject implements IDrawableObject {
 
         @Override
@@ -116,7 +124,7 @@ public class PlayerAnimation {
 
         @Override
         public int getY() {
-            return (int) ControllerPlayer.getInstance().getPlayerPositionY() + Math.max(0, frameHeight - heightNotTinted);
+            return (int) ControllerPlayer.getInstance().getPlayerPositionY() + getHeightTinted();
         }
 
         @Override
