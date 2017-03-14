@@ -2,6 +2,7 @@ package org.byters.jamgame.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.byters.engine.view.DrawerDrawableObjectList;
@@ -9,6 +10,7 @@ import org.byters.engine.view.IScreen;
 import org.byters.jamgame.controller.*;
 import org.byters.jamgame.model.DrawableObjectsEnum;
 import org.byters.jamgame.model.ItemDayMeta;
+import org.byters.jamgame.model.PlayerModel;
 import org.byters.jamgame.model.Strings;
 
 public class ScreenGame implements IScreen {
@@ -28,6 +30,13 @@ public class ScreenGame implements IScreen {
 
     private void drawObjects(SpriteBatch batch) {
         drawerVerticalSortedObjects.draw(batch, ControllerDays.getInstance().getDrawableObjects());
+        if (playerAnimation.getTextureTinted() != null) {
+            batch.setColor(PlayerModel.TINT_COLOR);
+            batch.draw(playerAnimation.getTextureTinted()
+                    , ControllerPlayer.getInstance().getPlayerPositionX()
+                    , ControllerPlayer.getInstance().getPlayerPositionY());
+            batch.setColor(Color.WHITE);
+        }
     }
 
     private void drawUI(SpriteBatch batch) {
@@ -63,6 +72,7 @@ public class ScreenGame implements IScreen {
         drawerVerticalSortedObjects.setTexture(playerAnimation.getTexture(), playerAnimation.getDrawableObject().getID());
 
         ControllerItemsDay.getInstance().update();
+        ControllerDays.getInstance().update();
     }
 
     @Override
