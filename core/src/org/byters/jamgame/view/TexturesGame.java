@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 class TexturesGame {
 
+    static final String ANIMATION_FILE_WATER_RINGS = "graphics/waterRings.png";
+    static final String ANIMATION_FILE_FISH_WATER = "graphics/fishInWater.png";
+
     private static final String FILE_TEXTURE_ITEM_BOX = "graphics/items/box.png";
     private static final String FILE_TEXTURE_ITEM_PLANK1 = "graphics/items/h5.png";
     private static final String FILE_TEXTURE_ITEM_PLANK2 = "graphics/items/h6.png";
@@ -56,7 +59,7 @@ class TexturesGame {
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
-    public TextureRegion getCrab() {
+    TextureRegion getCrab() {
         return tCrab;
     }
 
