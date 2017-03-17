@@ -2,6 +2,7 @@ package org.byters.jamgame.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
+import com.sun.istack.internal.Nullable;
 import org.byters.engine.controller.ControllerMain;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class ItemsDayModel {
     private static final double SIN_HEIGHT_SCREEN_PERCENT = 0.01f;
     private ItemsDayDataCollection itemsAll;
     private ArrayList<ItemDayMeta> itemsAvailable;
+    @Nullable
     private ItemDayMeta itemInteracted;
 
     public void load() {
@@ -54,11 +56,11 @@ public class ItemsDayModel {
     }
 
     public void removeItemInteracted() {
-        if (itemsAvailable == null) return;
+        if (itemsAvailable == null || itemInteracted == null) return;
         itemsAvailable.remove(itemInteracted);
     }
 
-    public void setItemInteracted(ItemDayMeta item) {
+    public void setItemInteracted(@Nullable ItemDayMeta item) {
         itemInteracted = item;
     }
 
