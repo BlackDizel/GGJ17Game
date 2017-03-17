@@ -15,8 +15,6 @@ import org.byters.jamgame.model.Strings;
 
 public class ScreenGame implements IScreen {
 
-    private static final float FISH_POSITION_X_FACTOR = 0.1f;
-    private static final float FISH_POSITION_Y_FACTOR = 0.3f;
     private PlayerAnimation playerAnimation;
     private SimpleLineLoopAnimation waterRingsAnimation;
     private SimpleLineLoopAnimation waterFishAnimation;
@@ -71,8 +69,8 @@ public class ScreenGame implements IScreen {
                 , (Gdx.graphics.getHeight() - texturesGame.tIsland.getHeight()) / 2 - 40);
 
         batch.draw(waterFishAnimation.getCurrentFrame()
-                , Gdx.graphics.getWidth() * FISH_POSITION_X_FACTOR
-                , Gdx.graphics.getHeight() * FISH_POSITION_Y_FACTOR);
+                , Gdx.graphics.getWidth() * ControllerObjectsDay.FISH_POSITION_X_FACTOR
+                , Gdx.graphics.getHeight() * ControllerObjectsDay.FISH_POSITION_Y_FACTOR);
     }
 
     private void drawHint(SpriteBatch batch) {
