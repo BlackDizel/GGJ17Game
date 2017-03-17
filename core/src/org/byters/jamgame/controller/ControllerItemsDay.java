@@ -1,12 +1,12 @@
 package org.byters.jamgame.controller;
 
+import com.badlogic.gdx.Gdx;
 import org.byters.jamgame.model.ItemDayMeta;
 import org.byters.jamgame.model.ItemsDayModel;
 
 import java.util.ArrayList;
 
 public class ControllerItemsDay {
-    private static final float INTERACTION_DISTANCE = 30;
     private static ControllerItemsDay instance;
     private ItemsDayModel model;
 
@@ -39,15 +39,20 @@ public class ControllerItemsDay {
         model.removeItemInteracted();
 
         //todo temporary #NEWDAY
-        if (model.isNoAvailableItems() && !ControllerDays.getInstance().isLastDay()) {
+        if (model.isNoAvailableItems() && !ControllerDays.getInstance().isLastDay()
+                && !ControllerMissions.getInstance().isMissionFoodSearch()) {
             ControllerDays.getInstance().dayOver();
         }
+    }
+
+    void removeItemInteract() {
+        model.setItemInteracted(null);
     }
 
     boolean setItemInteract() {
         if (model.getItemsDay() == null) return false;
         for (ItemDayMeta item : model.getItemsDay()) {
-            if (Math.abs(item.getX() - ControllerPlayer.getInstance().getPositionXCenter()) < INTERACTION_DISTANCE) {
+            if (Math.abs(item.getX() - ControllerPlayer.getInstance().getPositionXCenter()) < ControllerObjectsDay.INTERACTION_DISTANCE_ITEM_FACTOR * Gdx.graphics.getWidth()) {
                 model.setItemInteracted(item);
                 return true;
             }
