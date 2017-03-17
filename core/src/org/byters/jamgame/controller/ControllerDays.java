@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class ControllerDays {
     private static final int DAY_LAST = 3;
+    private static final int DAY_FIRST = 1;
     private static ControllerDays instance;
     private int currentDay;
     private ControllerSortedVerticalDrawableObjectList controllerDrawableObjects;
@@ -38,7 +39,7 @@ public class ControllerDays {
 
     public void resetDays() {
         controllerDrawableObjects = new ControllerSortedVerticalDrawableObjectList();
-        currentDay = 1;
+        currentDay = DAY_FIRST;
     }
 
     public ArrayList<IDrawableObject> getDrawableObjects() {
@@ -55,5 +56,9 @@ public class ControllerDays {
 
     public void update() {
         controllerDrawableObjects.sort();
+    }
+
+    boolean isFirstDay() {
+        return currentDay == DAY_FIRST;
     }
 }
