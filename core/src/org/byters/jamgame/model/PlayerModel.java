@@ -8,12 +8,16 @@ import org.byters.jamgame.model.inventory.Inventory;
 
 public class PlayerModel {
     public static final Color TINT_COLOR = Color.CYAN;
+    public static final int INTERACTION_TYPE_FISHING = 0;
+    public static final int INTERACTION_TYPE_ITEM = 1;
     private static final float COLLISION_RIGHT_FACTOR = 0.8f;
     private static final float COLLISION_LEFT_FACTOR = 0.2f;
     private static final float speed = 52f;
     private static final float PLAYER_WIDTH = 40;
     private static final float PLAYER_HEIGHT = 64;
     private static final float MAX_VERTICAL_DELTA = 80;
+    private int interactionType;
+
     private Rectangle newPosition;
     private float xDirection, yDirection;
     private Rectangle bounds;
@@ -90,11 +94,12 @@ public class PlayerModel {
         return isInteract;
     }
 
-    public void interact(long timeInteractionMillis) {
+    public void interact(long timeInteractionMillis, int interactionType) {
         isInteract = true;
         timeStartInteractMillis = System.currentTimeMillis();
         this.timeInteractionMillis = timeInteractionMillis;
         animationState = AnimationState.INTERACT;
+        this.interactionType = interactionType;
     }
 
     public float getMessagePostitionX() {
@@ -123,6 +128,10 @@ public class PlayerModel {
 
     public boolean isRightDirection() {
         return xDirection >= 0;
+    }
+
+    public boolean isInteractionType(int interactionType) {
+        return this.interactionType == interactionType;
     }
 
     public enum AnimationState {

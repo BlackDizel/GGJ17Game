@@ -22,8 +22,13 @@ public class ControllerPlayer {
         boolean isComplete = model.updateInteraction();
         model.update();
 
-        if (isComplete)
-            ControllerItemsDay.getInstance().interactComplete();
+        if (isComplete) {
+            if (model.isInteractionType(PlayerModel.INTERACTION_TYPE_FISHING)) {
+                if (ControllerMissions.getInstance().isMissionFoodSearch())
+                    ControllerDays.getInstance().dayOver();
+            } else
+                ControllerItemsDay.getInstance().interactComplete();
+        }
     }
 
     public void load() {
@@ -53,10 +58,17 @@ public class ControllerPlayer {
 
     public void interact() {
         if (model.isInteract()) return;
-        if (!ControllerItemsDay.getInstance().setItemInteract()) return;
-        int time = ControllerItems.getInstance().getInteractedItemTime();
-        //ControllerDialogSelector.getInstance().showDialog(); //todo temp remove dialogs from game :(
-        model.interact(time);
+        if (ControllerItemsDay.getInstance().setItemInteract()) {
+            int time = ControllerItems.getInstance().getInteractedItemTime();
+            model.interact(time, PlayerModel.INTERACTION_TYPE_ITEM);
+        } else if (ControllerInventory.getInstance().isContainsSpear()
+                && ControllerObjectsDay.getInstance().isFishInteractPosition(getPlayerPositionX())
+                && ControllerMissions.getInstance().isMissionFoodSearch()) {
+            ControllerItemsDay.getInstance().removeItemInteract();
+            model.interact(ControllerMissions.FISH_INTERACTION_TIME_MILLIS, PlayerModel.INTERACTION_TYPE_FISHING);
+        }// else if () {//todo add crab dialog
+        //ControllerDialogSelector.getInstance().showDialog();
+        //}
     }
 
     public void stop() {
