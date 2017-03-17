@@ -23,6 +23,7 @@ public class Inventory {
     private static final int MAX_ITEMS_NUM = 20;
     private static final int ITEM_HEIGHT = 20;
     private static final String TITLE_ITEM_QUEST = "transmitter";
+    private static final Integer SPEAR_ID = 13; //todo depends on json
 
     private boolean isVisible;
     private Texture tInventoryBackground;
@@ -68,6 +69,7 @@ public class Inventory {
     }
 
     public void draw(SpriteBatch batch) {
+        //todo move to view
         if (tInventoryBackground == null || font == null) return;
         batch.draw(tInventoryBackground
                 , ControllerPlayer.getInstance().getCameraInventoryTranslateX() + Gdx.graphics.getWidth() - INVENTORY_WIDTH, 0
@@ -99,7 +101,7 @@ public class Inventory {
         return false;
     }
 
-    boolean combineItems(InventoryCell cell1, InventoryCell cell2) {
+    private boolean combineItems(InventoryCell cell1, InventoryCell cell2) {
 
         int itemId;
         itemId = ControllerItems.getInstance().getItemIdCombined(cell1, cell2);
@@ -142,6 +144,7 @@ public class Inventory {
     }
 
     public void input(int x, int y) {
+        //todo move to controller
         int yPos = Gdx.graphics.getHeight() - y;
 
         if (rButtonUse.contains(x, yPos)) {
@@ -222,6 +225,16 @@ public class Inventory {
             itemsIDs[i] = null;
 
         setMode(Mode.VIEW);
+    }
+
+    public boolean isContainsSpear() {
+        for (InventoryCell item : itemsIDs) {
+            if (item == null || item.getItems() == null || item.getItems().size() == 0)
+                continue;
+            if (item.getItems().get(0).equals(SPEAR_ID))
+                return true;
+        }
+        return false;
     }
 
     private enum Mode {CRAFT, USE, VIEW}

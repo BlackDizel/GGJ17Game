@@ -54,4 +54,8 @@ public class ControllerInventory {
     public void clearInventory() {
         inventory.removeItems();
     }
+
+    boolean isContainsSpear() {
+        return inventory.isContainsSpear();
+    }
 }
