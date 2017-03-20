@@ -24,7 +24,6 @@ public class ItemsDayModel {
     }
 
     public void loadItems(int day) {
-        itemsAvailable = null;
         if (itemsAll == null) return;
 
         int[] itemsIdsDay = null;
@@ -38,7 +37,7 @@ public class ItemsDayModel {
         if (itemsIdsDay == null || itemsIdsDay.length == 0)
             return;
 
-        itemsAvailable = new ArrayList<ItemDayMeta>();
+        if (itemsAvailable == null) itemsAvailable = new ArrayList<ItemDayMeta>();
         for (int id : itemsIdsDay) {
 
             int x = Gdx.graphics.getWidth() / 3 + (int) (ControllerMain.getInstance().getRandom().nextFloat() * (Gdx.graphics.getWidth() / 3));
