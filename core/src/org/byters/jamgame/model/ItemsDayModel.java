@@ -1,9 +1,9 @@
 package org.byters.jamgame.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Json;
 import com.sun.istack.internal.Nullable;
 import org.byters.engine.controller.ControllerMain;
+import org.byters.jamgame.controller.ControllerJson;
 
 import java.util.ArrayList;
 
@@ -18,9 +18,7 @@ public class ItemsDayModel {
     private ItemDayMeta itemInteracted;
 
     public void load() {
-
-        String json = Gdx.files.internal("items_day.json").readString();
-        itemsAll = new Json().fromJson(ItemsDayDataCollection.class, json);
+        itemsAll = ControllerJson.getInstance().getItemsDay();
     }
 
     public void loadItems(int day) {

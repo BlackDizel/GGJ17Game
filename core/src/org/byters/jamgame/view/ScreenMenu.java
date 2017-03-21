@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.byters.engine.view.IScreen;
 import org.byters.jamgame.controller.ControllerMenu;
+import org.byters.jamgame.model.Strings;
 
 public class ScreenMenu implements IScreen {
 
@@ -31,6 +32,7 @@ public class ScreenMenu implements IScreen {
 
     @Override
     public void load(SpriteBatch batch) {
+        Strings.getInstance().load();
         ControllerMenu.getInstance().load();
     }
 

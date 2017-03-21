@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "message": "Use A,D to move, Space to interact, use TAB to open/close inventory"
+  },
+  {
+    "id": 1,
+    "message": "This is short story about hope and strength of mind"
+  },
+  {
+    "id": 2,
+    "message": "Once man awake at the strange place..."
+  },
+  {
+    "id": 3,
+    "message": "I use transmitter and sending \"SOS\" again and again.\nWhen the battery is over, speaker say:\n\"Coast patrol listen. Rescue group on the way\""
+  },
+  {
+    "id": 4,
+    "message": "Thanks for playing"
+  },
+  {
+    "id": 5,
+    "message": "I can't do anything more today and wait next day.\nAt dawn waves throw on shore more strange objects"
+  },
+  {
+    "id": 6,
+    "message": "Cannot use this"
+  },
+  {
+    "id": 7,
+    "message": "Success"
+  },
+  {
+    "id": 8,
+    "message": "Cannot craft"
+  },
+  {
+    "id": 9,
+    "message": "back"
+  }
+]

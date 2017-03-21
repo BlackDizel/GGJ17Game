@@ -5,10 +5,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.byters.engine.model.Menu;
+import org.byters.jamgame.model.Strings;
 
 public class ControllerMenu {
-    private static final String MENU_FILE = "menu.json";
-    private static final String TEXT_BACK = "back";
     private static ControllerMenu instance;
     private BitmapFont font;
     private Menu menu;
@@ -35,8 +34,8 @@ public class ControllerMenu {
 
     public void load() {
         font = new BitmapFont();
-        menu.load(MENU_FILE);
-        menu.setTextBack(TEXT_BACK);
+        menu.load(ControllerJson.FILE_JSON_MENU);
+        menu.setTextBack(Strings.getInstance().getString(Strings.BACK_ID));
     }
 
     public void menuItemNext() {

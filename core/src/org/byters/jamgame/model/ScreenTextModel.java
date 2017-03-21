@@ -33,18 +33,18 @@ public class ScreenTextModel {
         return null;
     }
 
-    public String getText() {
-        return state == ScreenState.STORY
-                ? Strings.getInstance().story
+    public String getText() { //todo move to json
+        return Strings.getInstance().getString(state == ScreenState.STORY
+                ? Strings.STORY_ID
                 : state == ScreenState.STORY1
-                ? Strings.getInstance().story1
+                ? Strings.STORY1_ID
                 : state == ScreenState.GAMEOVER
-                ? Strings.getInstance().gameover
+                ? Strings.GAMEOVER_ID
                 : state == ScreenState.GAMEOVER1
-                ? Strings.getInstance().gameover1
+                ? Strings.GAMEOVER1_ID
                 : state == ScreenState.DAY_OVER
-                ? Strings.getInstance().dayover
-                : "";
+                ? Strings.DAYOVER_ID
+                : Strings.NO_VALUE_ID);
     }
 
     private enum ScreenState {

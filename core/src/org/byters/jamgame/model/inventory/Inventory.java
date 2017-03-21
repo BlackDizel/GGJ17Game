@@ -177,7 +177,7 @@ public class Inventory {
                 return;
             }
             if (checkDisassembly(item)) return;
-            ControllerMessage.getInstance().showMessage(Strings.getInstance().cannot_use);
+            ControllerMessage.getInstance().showMessage(Strings.getInstance().getString(Strings.CANNOT_USE_ID));
         } else if (mode == Mode.CRAFT) {
             if (selectedItem == null) {
                 selectedItem = item;
@@ -189,8 +189,8 @@ public class Inventory {
                 return;
             }
 
-            ControllerMessage.getInstance().showMessage(
-                    combineItems(selectedItem, item) ? Strings.getInstance().success : Strings.getInstance().cannot_craft);
+            ControllerMessage.getInstance().showMessage(Strings.getInstance().getString(
+                    combineItems(selectedItem, item) ? Strings.SUCCESS_ID : Strings.CANNOT_CRAFT_ID));
         }
     }
 

@@ -1,18 +1,26 @@
 package org.byters.jamgame.model;
 
+import com.sun.istack.internal.Nullable;
+import org.byters.jamgame.controller.ControllerJson;
+
+import java.util.HashMap;
+
 public class Strings {
 
-    private static Strings instance;
+    public static final int BACK_ID = 9; //todo move to json
+    public static final int CANNOT_USE_ID = 6;
+    public static final int SUCCESS_ID = 7;
+    public static final int CANNOT_CRAFT_ID = 8;
+    public static final int CONTROL_HINT_ID = 0;
+    public static final int STORY_ID = 1;
+    public static final int STORY1_ID = 2;
+    public static final int GAMEOVER_ID = 3;
+    public static final int GAMEOVER1_ID = 4;
+    public static final int DAYOVER_ID = 5;
+    public static final int NO_VALUE_ID = -1;
 
-    public String control_hint = "Use A,D to move, Space to interact, use TAB to open/close inventory";
-    public String story = "This is short story about hope and strength of mind";
-    public String story1 = "Once man awake at the strange place...";
-    public String gameover = "I use transmitter and sending \"SOS\" again and again.\nWhen the battery is over, speaker say:\n\"Coast patrol listen. Rescue group on the way\"";
-    public String gameover1 = "Thanks for playing";
-    public String dayover = "I can't do anything more today and wait next day.\nAt dawn waves throw on shore more strange objects";
-    public String cannot_use = "Cannot use this";
-    public String success = "Success";
-    public String cannot_craft = "Cannot craft";
+    private static Strings instance;
+    private HashMap<Integer, String> strings;
 
     private Strings() {
     }
@@ -20,6 +28,17 @@ public class Strings {
     public static Strings getInstance() {
         if (instance == null) instance = new Strings();
         return instance;
+    }
+
+    @Nullable
+    public String getString(int id) {
+        if (strings == null || !strings.containsKey(id))
+            return null;
+        return strings.get(id);
+    }
+
+    public void load() {
+        strings = ControllerJson.getInstance().readStrings();
     }
 
 }

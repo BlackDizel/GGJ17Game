@@ -1,7 +1,5 @@
 package org.byters.jamgame.controller;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Json;
 import org.byters.jamgame.model.ItemsDayModel;
 import org.byters.jamgame.model.inventory.*;
 
@@ -10,7 +8,6 @@ import java.util.Collections;
 
 public class ControllerItems {
     public static final int NO_VALUE = -1;
-    private static final String ITEMS_JSON = "items.json";
     private static ControllerItems instance;
     private Items itemsData;
 
@@ -24,8 +21,7 @@ public class ControllerItems {
     }
 
     public void load() {
-        String json = Gdx.files.internal(ITEMS_JSON).readString();
-        itemsData = new Json().fromJson(Items.class, json);
+        itemsData = ControllerJson.getInstance().readItems();
     }
 
     public String getItemTitle(int id) {

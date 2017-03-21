@@ -75,7 +75,7 @@ public class ScreenGame implements IScreen {
     }
 
     private void drawHint(SpriteBatch batch) {
-        font.draw(batch, Strings.getInstance().control_hint, 20, 20);
+        font.draw(batch, Strings.getInstance().getString(Strings.CONTROL_HINT_ID), 20, 20);
     }
 
     @Override
