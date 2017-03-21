@@ -50,5 +50,65 @@
   {
     "id": 12,
     "message": "exit"
+  },
+  {
+    "id": 13,
+    "message": "trash"
+  },
+  {
+    "id": 14,
+    "message": "bottle"
+  },
+  {
+    "id": 15,
+    "message": "plank"
+  },
+  {
+    "id": 16,
+    "message": "stone"
+  },
+  {
+    "id": 17,
+    "message": "TV"
+  },
+  {
+    "id": 18,
+    "message": "camera"
+  },
+  {
+    "id": 19,
+    "message": "alarm"
+  },
+  {
+    "id": 20,
+    "message": "battery"
+  },
+  {
+    "id": 21,
+    "message": "circuit board"
+  },
+  {
+    "id": 22,
+    "message": "wires"
+  },
+  {
+    "id": 23,
+    "message": "antenna"
+  },
+  {
+    "id": 24,
+    "message": "microphone"
+  },
+  {
+    "id": 25,
+    "message": "spear"
+  },
+  {
+    "id": 26,
+    "message": "glassing"
+  },
+  {
+    "id": 27,
+    "message": "transmitter"
   }
 ]

@@ -1,6 +1,7 @@
 package org.byters.jamgame.controller;
 
 import org.byters.jamgame.model.ItemsDayModel;
+import org.byters.jamgame.model.Strings;
 import org.byters.jamgame.model.inventory.*;
 
 import java.util.ArrayList;
@@ -26,8 +27,10 @@ public class ControllerItems {
 
     public String getItemTitle(int id) {
         for (ItemInfo item : itemsData.getItems()) {
-            if (item.getId() == id)
-                return item.getTitle();
+            if (item.getId() == id) {
+                String title = Strings.getInstance().getString(item.getTitleID());
+                return title == null ? "" : title;
+            }
         }
         return "";
     }

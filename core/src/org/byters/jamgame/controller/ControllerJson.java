@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class ControllerJson {
     static final String FILE_JSON_MENU = "menu.json";
-    private static final String FILE_JSON_ITEMS = "en/items.json";
+    private static final String FILE_JSON_ITEMS = "items.json";
     private static final String FILE_JSON_STRINGS = "en/strings.json";
     private static final String FILE_JSON_ITEMS_DAY = "items_day.json";
 
