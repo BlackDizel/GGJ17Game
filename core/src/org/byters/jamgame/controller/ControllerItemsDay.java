@@ -67,4 +67,8 @@ public class ControllerItemsDay {
     int getInteractedItemID() {
         return model.getItemInteractedId();
     }
+
+    void resetItems() {
+        model.resetItems();
+    }
 }

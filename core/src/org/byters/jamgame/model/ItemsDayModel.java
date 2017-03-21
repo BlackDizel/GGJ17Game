@@ -73,4 +73,8 @@ public class ItemsDayModel {
             item.translateY(value);
         }
     }
+
+    public void resetItems() {
+        itemsAvailable = null;
+    }
 }
