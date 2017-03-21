@@ -12,6 +12,7 @@ import org.byters.jamgame.controller.ControllerItems;
 import org.byters.jamgame.controller.ControllerMessage;
 import org.byters.jamgame.controller.ControllerPlayer;
 import org.byters.jamgame.model.Strings;
+import org.byters.jamgame.view.HelperFont;
 
 public class Inventory {
     public static final int INVENTORY_WIDTH = 200;
@@ -22,7 +23,7 @@ public class Inventory {
     private static final String TEXTURE_INVENTORY_USE_PRESSED = "graphics/buttons/useh.png";
     private static final int MAX_ITEMS_NUM = 20;
     private static final int ITEM_HEIGHT = 20;
-    private static final String TITLE_ITEM_QUEST = "transmitter";
+    private static final int ITEM_QUEST_ID = 15;
     private static final Integer SPEAR_ID = 13; //todo depends on json
 
     private boolean isVisible;
@@ -62,7 +63,7 @@ public class Inventory {
         tCraftPressed = new Texture(Gdx.files.internal(TEXTURE_INVENTORY_CRAFT_PRESSED));
         tUsePressed = new Texture(Gdx.files.internal(TEXTURE_INVENTORY_USE_PRESSED));
         tInventoryBackground.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.Repeat);
-        font = new BitmapFont();
+        font = HelperFont.getInstance().getFont();
 
         rButtonCraft = new Rectangle(Gdx.graphics.getWidth() - INVENTORY_WIDTH + 40, tCraft.getHeight() + 20, tCraft.getWidth(), tCraft.getHeight());
         rButtonUse = new Rectangle(Gdx.graphics.getWidth() - INVENTORY_WIDTH + 40 + rButtonCraft.getWidth() + 20, tUse.getHeight() + 20, tUse.getWidth(), tUse.getHeight());
@@ -172,7 +173,7 @@ public class Inventory {
         if (item == null) return;
 
         if (mode == Mode.USE) {
-            if (item.getTitle().equals(TITLE_ITEM_QUEST)) {
+            if (item.getItems() != null && item.getItems().size() > 0 && item.getItems().get(0).equals(ITEM_QUEST_ID)) {
                 ControllerDays.getInstance().dayOver();
                 return;
             }
