@@ -95,7 +95,7 @@ public class DialogWindow {
     public void load() {
         controllerDialog = new ControllerDialog();
         controllerDialog.init(dialog_file);
-        dialogFont = new BitmapFont();
+        dialogFont = HelperFont.getInstance().newInstanceFont();
     }
 
     public boolean isShown() {

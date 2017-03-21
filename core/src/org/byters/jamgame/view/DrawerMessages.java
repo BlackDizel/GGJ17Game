@@ -10,7 +10,7 @@ public class DrawerMessages {
     private BitmapFont font;
 
     public void load() {
-        font = new BitmapFont();
+        font = HelperFont.getInstance().newInstanceFont();
 
     }
 

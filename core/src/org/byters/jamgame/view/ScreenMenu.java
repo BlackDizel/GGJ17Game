@@ -32,7 +32,6 @@ public class ScreenMenu implements IScreen {
 
     @Override
     public void load(SpriteBatch batch) {
-        Strings.getInstance().load();
         ControllerMenu.getInstance().load();
     }
 

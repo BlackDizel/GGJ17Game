@@ -22,7 +22,7 @@ public class ScreenText implements IScreen {
 
     @Override
     public void load(SpriteBatch batch) {
-        font = new BitmapFont();
+        font = HelperFont.getInstance().newInstanceFont();
         layout = new GlyphLayout();
         layout.setText(font, ControllerScreenText.getInstance().getText());
     }

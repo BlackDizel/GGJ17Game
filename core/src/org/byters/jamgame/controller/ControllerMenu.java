@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.byters.engine.model.Menu;
 import org.byters.jamgame.model.Strings;
+import org.byters.jamgame.view.HelperFont;
 
 public class ControllerMenu {
     private static ControllerMenu instance;
@@ -36,7 +37,7 @@ public class ControllerMenu {
     }
 
     public void load() {
-        font = new BitmapFont();
+        font = HelperFont.getInstance().getFont();
         menu.load(ControllerJson.FILE_JSON_MENU);
         menu.setTextBackID(Strings.BACK_ID);
     }
