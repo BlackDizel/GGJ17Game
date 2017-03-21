@@ -22,6 +22,7 @@ public class ScreenGame implements IScreen {
 
     private BitmapFont font;
     private TexturesGame texturesGame;
+    private DrawerMessages drawerMessages;
 
     @Override
     public void draw(SpriteBatch batch) {
@@ -49,7 +50,7 @@ public class ScreenGame implements IScreen {
 
     private void drawUI(SpriteBatch batch) {
         ControllerDialogSelector.getInstance().draw(batch);
-        ControllerMessage.getInstance().draw(batch);
+        drawerMessages.draw(batch);
         drawHint(batch);
         ControllerInventory.getInstance().drawInventory(batch);
     }
@@ -80,6 +81,7 @@ public class ScreenGame implements IScreen {
     @Override
     public void update() {
         ControllerPlayer.getInstance().update();
+        ControllerMessage.getInstance().update();
         playerAnimation.update();
         waterRingsAnimation.update();
         waterFishAnimation.update();
@@ -165,7 +167,9 @@ public class ScreenGame implements IScreen {
         ControllerPlayer.getInstance().load();
         ControllerItems.getInstance().load();
         ControllerInventory.getInstance().load();
-        ControllerMessage.getInstance().load();
+
+        drawerMessages = new DrawerMessages();
+        drawerMessages.load();
         ControllerItemsDay.getInstance().load();
         loadDay();
     }
@@ -191,5 +195,6 @@ public class ScreenGame implements IScreen {
     @Override
     public void dispose() {
         texturesGame.dispose();
+        drawerMessages.dispose();
     }
 }

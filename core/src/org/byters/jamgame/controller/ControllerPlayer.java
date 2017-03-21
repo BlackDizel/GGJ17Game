@@ -76,11 +76,11 @@ public class ControllerPlayer {
         model.move(vMoveDirection);
     }
 
-    float getMessagePositionX() {
+    public float getMessagePositionX() {
         return model.getMessagePostitionX();
     }
 
-    float getMessagePositionY() {
+    public float getMessagePositionY() {
         return model.getMessagePostitionY();
     }
 
