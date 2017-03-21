@@ -25,7 +25,10 @@ public class ControllerMenu {
         if (menu.getItemsCount() == 0)
             return;
         for (int i = 0; i < menu.getItemsCount(); ++i) {
-            String title = menu.getMenuTitle(i);
+            int id = menu.getMenuTitleId(i);
+            if (id == Menu.NO_VALUE)
+                continue;
+            String title = Strings.getInstance().getString(id);
             if (title == null || title.trim().equals("")) continue;
             font.setColor(menu.isCurrentIndex(i) ? Color.RED : Color.WHITE);
             font.draw(batch, title, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - i * 20);
@@ -35,7 +38,7 @@ public class ControllerMenu {
     public void load() {
         font = new BitmapFont();
         menu.load(ControllerJson.FILE_JSON_MENU);
-        menu.setTextBack(Strings.getInstance().getString(Strings.BACK_ID));
+        menu.setTextBackID(Strings.BACK_ID);
     }
 
     public void menuItemNext() {

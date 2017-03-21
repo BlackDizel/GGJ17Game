@@ -38,5 +38,17 @@
   {
     "id": 9,
     "message": "back"
+  },
+  {
+    "id": 10,
+    "message": "menu"
+  },
+  {
+    "id": 11,
+    "message": "play"
+  },
+  {
+    "id": 12,
+    "message": "exit"
   }
 ]

@@ -1,14 +1,14 @@
 {
   "id": 0,
-  "title": "menu",
+  "titleID": 10,
   "childs": [
     {
       "id": 1,
-      "title": "play"
+      "titleID": 11
     },
     {
       "id": 2,
-      "title": "exit"
+      "titleID": 12
     }
   ]
 }
