@@ -41,6 +41,7 @@ public class ControllerDays {
         controllerDrawableObjects = new ControllerSortedVerticalDrawableObjectList();
         currentDay = DAY_FIRST;
         ControllerItemsDay.getInstance().resetItems();
+        ControllerMessagesQueue.getInstance().reset();
     }
 
     public ArrayList<IDrawableObject> getDrawableObjects() {

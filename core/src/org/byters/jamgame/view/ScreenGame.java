@@ -82,6 +82,7 @@ public class ScreenGame implements IScreen {
     public void update() {
         ControllerPlayer.getInstance().update();
         ControllerMessage.getInstance().update();
+        ControllerMessagesQueue.getInstance().update();
         playerAnimation.update();
         waterRingsAnimation.update();
         waterFishAnimation.update();
@@ -101,6 +102,12 @@ public class ScreenGame implements IScreen {
 
         if (ControllerDialogSelector.getInstance().isDialogShown()) {
             ControllerDialogSelector.getInstance().input();
+            return;
+        }
+
+        if (ControllerMessagesQueue.getInstance().isMessageShown()
+                && ControllerMessagesQueue.getInstance().isMessageInteracted()) {
+            ControllerMessagesQueue.getInstance().input();
             return;
         }
 
